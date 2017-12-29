@@ -30,6 +30,21 @@
      ]
  };
 
+var albumCher = {
+    name: 'Love Hurts',
+    artist:'Cher'
+    label: 'Imperial'
+    year: '1991'
+    albumArtUrl: 'assets/images/album_covers/15.png',
+    songs: [
+    { name: 'Save Up All Your Tears', length: '4:00'},
+    { name: 'Love Hurts', length: '4:19'},
+    { name: 'Love and Understanding', length: '2:51'},
+    { name: 'Fire of Eden', length: '1:58'},
+    { name: 'I\'ll Never Stop Loving You', length: '3:12'},
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -41,15 +56,14 @@ var createSongRow = function(songNumber, songName, songLength) {
  
      return template;
  };
-
- var setCurrentAlbum = function(album) {
      // #1
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
- 
+
+ var setCurrentAlbum = function(album) {
      // #2
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -67,4 +81,14 @@ var createSongRow = function(songNumber, songName, songLength) {
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
- };
+     
+     var album = [albumPicasso, albumMarconi, albumCher];
+     var index = 1;
+     albumImage.addEventListener("click", function(event){
+         setCurrentAlbum(album[index]);
+         index++;
+         if (index == albums.length) {
+             index = 0;
+         }
+    }};
+};
